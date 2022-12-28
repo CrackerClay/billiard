@@ -1,0 +1,182 @@
+<style type="text/css">
+    .ball {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border-radius: 50%;
+        position: relative;
+        /*background: radial-gradient(circle at 50% 120%, #323232, #0a0a0a 80%, #000000 100%); */
+    }
+
+    .ball:before {
+        content: "";
+        position: absolute;
+        background: radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+        border-radius: 50%;
+        bottom: 2.5%;
+        left: 5%;
+        opacity: 0.6;
+        height: 100%;
+        width: 90%;
+        -webkit-filter: blur(5px);
+        z-index: 2;
+    }
+
+    .ball:after {
+        width: 100%;
+        height: 100%;
+        content: "";
+        position: absolute;
+        top: 5%;
+        left: 10%;
+        border-radius: 50%;
+        background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) 24%, rgba(255, 255, 255, 0) 24%);
+        -webkit-transform: translateX(-35px) translateY(-25px) skewX(-20deg);
+        -moz-transform: translateX(-35px) translateY(-25px) skewX(-20deg);
+        -ms-transform: translateX(-35px) translateY(-25px) skewX(-20deg);
+        -o-transform: translateX(-35px) translateY(-25px) skewX(-20deg);
+        transform: translateX(-35px) translateY(-25px) skewX(-20deg);
+        -webkit-filter: blur(10px);
+    }
+
+    .ball .eight {
+        width: 40px;
+        height: 40px;
+        margin: 20%;
+        left: 35%;
+        background: white;
+        border-radius: 50%;
+        -webkit-transform: translateX(-10px) translateY(0px) skewX(6deg) skewY(2deg);
+        -moz-transform: translateX(-10px) translateY(0px) skewX(6deg) skewY(2deg);
+        -ms-transform: translateX(-10px) translateY(0px) skewX(6deg) skewY(2deg);
+        -o-transform: translateX(-10px) translateY(0px) skewX(6deg) skewY(2deg);
+        transform: translateX(-10px) translateY(0px) skewX(6deg) skewY(2deg);
+        position: absolute;
+    }
+
+    .ball .eight:before {
+        content: attr(data-content-before);
+        display: block;
+        position: absolute;
+        text-align: center;
+        height: 80px;
+        width: 100px;
+        left: 10px;
+        top: 10px;
+        margin-left: -40px;
+        margin-top: -40px;
+        color: black;
+        font-family: Arial;
+        font-size: 35px;
+        line-height: 104px;
+    }
+
+    .ball .shadow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+        -webkit-transform: rotateX(10deg) translateZ(-180px);
+        -moz-transform: rotateX(10deg) translateZ(-180px);
+        -ms-transform: rotateX(10deg) translateZ(-180px);
+        -o-transform: rotateX(10deg) translateZ(-180px);
+        transform: rotateX(10deg) translateZ(-180px);
+        z-index: -1;
+    }
+
+    .stage {
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+        margin: 20px;
+        -webkit-perspective: 1200px;
+        -moz-perspective: 1200px;
+        -ms-perspective: 1200px;
+        -o-perspective: 1200px;
+        perspective: 1200px;
+        -webkit-perspective-origin: 50% 50%;
+        -moz-perspective-origin: 50% 50%;
+        -ms-perspective-origin: 50% 50%;
+        -o-perspective-origin: 50% 50%;
+        perspective-origin: 50% 50%;
+    }
+
+    body {
+        margin: 20px auto;
+        background: linear-gradient(to bottom, rgba(100, 100, 100, 0.2) 0%, rgba(255, 255, 255, 0.5) 40%, #ffffff 100%);
+        background-repeat: no-repeat;
+    }
+
+    .greater {
+        position: absolute;
+        background-color: #fff;
+        transform: translateX(-10px) translateY(0px) skewX(323deg) skewY(21deg);
+        width: 95px;
+        margin-top: 65;
+        border: 50%;
+        border-radius: 100%;
+        opacity: 0.9;
+    }
+
+</style>
+
+
+<html>
+
+<body>
+
+<!--<section class="stage">-->
+<!--    <figure class="ball">-->
+<!--        <span class="shadow"></span>-->
+<!--        <span class="eight" data-content-before="66"></span>-->
+<!--        <span class="greater">&nbsp;</span>-->
+<!--    </figure>-->
+<!--</section>-->
+
+
+</body>
+
+
+</html>
+<script type="text/javascript">
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    var color = ['fdca01', '0312ec', 'f21123', '36116b', 'fc7848', '047a40', '99494f', '333230',
+        'fdca01', '0312ec', 'f21123', '36116b', 'fc7848', '047a40', '99494f']
+    var num = 0;
+
+    while (arr.length !== 0) {
+        num++;
+        var index = Math.floor(Math.random() * arr.length)
+
+
+        var parent = document.getElementsByTagName("body")[0];
+        parent.innerHTML += "<section class=\"stage\">\n" +
+            "    <figure class=\"ball\" " +
+            (arr[index] > 8 ? (
+                        "style='background: radial-gradient(circle at -65% 270%, #ffffff 70%, " +
+                        "#" + (parseInt(color[index], 16) + 10).toString(16).padStart(6, '0') + " 80%, " +
+                        "#" + color[index] + " 100%);'>\n"
+                    )
+                    : (
+                        "style='background: radial-gradient(circle at 50% 120%, " +
+                        "#" + (parseInt(color[index], 16) + 5).toString(16).padStart(6, '0') + ", " +
+                        "#" + (parseInt(color[index], 16) + 10).toString(16).padStart(6, '0') + " 80%, " +
+                        "#" + color[index] + " 100%);'>\n"
+                    )
+
+            ) +
+            "        <span class=\"shadow\">&nbsp;</span>\n" +
+            "        <span class=\"eight\" data-content-before=\"" + arr[index] + "\"></span>\n" +
+            //(arr[index] > 8 ? "        <span class=\"greater\">&nbsp;</span>\n" : "") +
+            "    </figure>\n" +
+            "</section>";
+        if ((num % 5) === 0) {
+            parent.innerHTML += "<br/><br/>"
+        }
+
+        arr.splice(index, 1)
+        color.splice(index, 1)
+    }
+
+</script>
